@@ -1,3 +1,4 @@
+package org.hawkular;
 
 public interface StatisticalAlgo {
 

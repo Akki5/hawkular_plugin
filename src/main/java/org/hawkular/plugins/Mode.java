@@ -2,8 +2,10 @@
 /**
  * This plugin returns mode of the data list.
  */
+ package org.hawkular.plugins;
  
 import java.util.Arrays;
+import org.hawkular.*;
 public class Mode implements StatisticalAlgo {
 
 	int A[];

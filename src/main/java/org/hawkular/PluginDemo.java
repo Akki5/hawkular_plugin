@@ -1,3 +1,4 @@
+package org.hawkular;
 
 import java.io.*;
 import java.util.*;
@@ -47,7 +48,7 @@ public class PluginDemo {
 	}
 	
 	protected void getPlugins() {
-		File dir = new File(System.getProperty("user.dir") + File.separator + pluginsDir);
+		File dir = new File("D:/PROG/current_projects/gsoc/New folder/hawkular_plugin/target/classes/org/hawkular/" + pluginsDir);
 		ClassLoader cl = new PluginClassLoader(dir);
 		if (dir.exists() && dir.isDirectory()) {
 			// we'll only load classes directly in this directory -

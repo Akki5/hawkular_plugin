@@ -2,8 +2,10 @@
 /**
  * This plugin returns average of the data list.
  */
+ package org.hawkular.plugins;
  
 import java.util.Arrays;
+import org.hawkular.*;
 public class Average implements StatisticalAlgo {
 
 	int A[];
