@@ -2,11 +2,13 @@ package org.hawkular;
 
 import java.io.*;
 import java.util.*;
+import java.net.URLClassLoader;
+import java.net.URL;
 
 public class PluginDemo {
 
 	// the directory where we keep the plugin classes
-	String pluginsDir;
+	String jarDir, pluginsDir;
 
 	// a list where we keep an initialized object of each plugin class
 	List plugins;
@@ -16,13 +18,15 @@ public class PluginDemo {
 		if (args.length > 0)
 			pluginsDir = args[0];
 		else
-			pluginsDir = "plugins";
-
+			pluginsDir = "org.hawkular.plugins";
+		
+		jarDir = "target\\hawkular_plugin-1.0-SNAPSHOT.jar";
+		
 		plugins = new ArrayList();
 
 	}
 	
-	public static void main (String args[]) {
+	public static void main (String args[]) throws Exception {
 		
 		Scanner in = new Scanner(System.in);
 		
@@ -47,38 +51,31 @@ public class PluginDemo {
 			
 	}
 	
-	protected void getPlugins() {
-		File dir = new File("D:/PROG/current_projects/gsoc/New folder/hawkular_plugin/target/classes/org/hawkular/" + pluginsDir);
+	protected void getPlugins() throws Exception {
+		File dir  = new File(System.getProperty("user.dir")+ File.separator + jarDir);
 		ClassLoader cl = new PluginClassLoader(dir);
-		if (dir.exists() && dir.isDirectory()) {
-			// we'll only load classes directly in this directory -
-			// no subdirectories, and no classes in packages are recognized
-			String[] files = dir.list();
-			for (int i=0; i<files.length; i++) {
-				try {
-					// only consider files ending in ".class"
-					if (! files[i].endsWith(".class"))
+		if (dir.exists()) {
+			
+			String[] Class_names = {"Average","Minimum","Maximum","Mode","StdDev"};
+			for(int i=0;i<Class_names.length;i++)
+			{
+				Class c = cl.loadClass(Class_names[i]);
+				Class[] intf = c.getInterfaces();
+				for (int j=0; j<intf.length; j++) {
+					if (intf[j].getName().equals("org.hawkular.StatisticalAlgo")) {
+						// the following line assumes that StatisticalAlgo has a no-argument constructor
+						StatisticalAlgo pf = (StatisticalAlgo) c.newInstance();
+						plugins.add(pf);
 						continue;
-
-					Class c = cl.loadClass(files[i].substring(0, files[i].indexOf(".")));
-					Class[] intf = c.getInterfaces();
-					for (int j=0; j<intf.length; j++) {
-						if (intf[j].getName().equals("StatisticalAlgo")) {
-							// the following line assumes that StatisticalAlgo has a no-argument constructor
-							StatisticalAlgo pf = (StatisticalAlgo) c.newInstance();
-							plugins.add(pf);
-							continue;
-						}
 					}
-				} catch (Exception ex) {
-					System.err.println("File " + files[i] + " does not contain a valid PluginFunction class.");
 				}
 			}
 		}
+
 	}
 	
 	protected void runPlugins(int i, int A[]) {
-			
+	
 			((StatisticalAlgo)plugins.get(i)).setParameter(A);
 			System.out.println(((StatisticalAlgo)plugins.get(i)).getResult());
 			
