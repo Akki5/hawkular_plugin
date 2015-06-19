@@ -2,9 +2,11 @@
 /**
  * This plugin returns standard deviation of the data list.
  */
+ package org.hawkular.plugins;
  
 import java.util.Arrays;
 import java.math.*;
+import org.hawkular.*;
 public class StdDev implements StatisticalAlgo {
 
 	int A[];
