@@ -11,7 +11,7 @@ public class PluginDemo {
 	String jarDir, pluginsDir;
 
 	// a list where we keep an initialized object of each plugin class
-	List plugins;
+	static List plugins;
 	
 	// constructor to initialize plugin directory and the list plugins
 	PluginDemo (String args[]) {
@@ -42,9 +42,9 @@ public class PluginDemo {
 		// take input from user and use the concerned plugin
 		for(;;)
 		{
-			System.out.println("Enter the choice number corresponding to the required mathematical operation.\n");
+			System.out.println("Enter the choice number corresponding to the required mathematical operation.");
 			for(int i=0;i<plugins.size();i++)
-				System.out.println("'" + (i+1) + "' for " + ((StatisticalAlgo)plugins.get(i)).getPluginName() + "\n");
+				System.out.println("'" + (i+1) + "' for " + ((StatisticalAlgo)plugins.get(i)).getPluginName());
 			System.out.println("'0' to quit");
 			choice = in.nextInt();
 			if(choice==0)
