@@ -18,7 +18,7 @@ public class PluginDemoTest {
 		//initializing a static array for test purposes
 		int A[] = new int[]{3,5,9,2,4,7};
 		int choice=0;
-		double result[] = new double[]{5.0,2.0,9.0,4.5,2.6076809620810595};
+		double result[] = new double[]{5.0,9.0,2.0,4.5,2.6076809620810595};
 		
 		PluginDemo demo = new PluginDemo(args);
 		
