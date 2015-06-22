@@ -26,32 +26,7 @@ public class PluginDemo {
 
 	}
 	
-	public static void main (String args[]) throws Exception {
-		
-		Scanner in = new Scanner(System.in);
-		
-		//initializing a static array for test purposes
-		int A[] = new int[]{3,5,9,2,4,7};
-		int choice=0;
-		
-		PluginDemo demo = new PluginDemo(args);
-		
-		// load all classes in plugin directory via classloader class
-		demo.getPlugins();
-		
-		// take input from user and use the concerned plugin
-		for(;;)
-		{
-			System.out.println("Enter the choice number corresponding to the required mathematical operation.\n'1' for Average\n'2' for Maximum\n'3' for Minimum\n'4' for Mode\n'5' for Standard Deviation\n'0' to quit");
-			choice = in.nextInt();
-			if(choice==0)
-				break;
-			demo.runPlugins(choice-1,A);
-		}
-			
-	}
-	
-	protected void getPlugins() throws Exception {
+	public void getPlugins() throws Exception {
 		File dir  = new File(System.getProperty("user.dir")+ File.separator + jarDir);
 		ClassLoader cl = new PluginClassLoader(dir);
 		if (dir.exists()) {
@@ -74,10 +49,10 @@ public class PluginDemo {
 
 	}
 	
-	protected void runPlugins(int i, int A[]) {
+	public double runPlugins(int i, int A[]) {
 	
 			((StatisticalAlgo)plugins.get(i)).setParameter(A);
-			System.out.println(((StatisticalAlgo)plugins.get(i)).getResult());
+			return ((StatisticalAlgo)plugins.get(i)).getResult();
 			
 		}
 

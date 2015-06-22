@@ -1,7 +1,5 @@
-<<<<<<< HEAD:StatisticalAlgo.java
-=======
+
 package org.hawkular;
->>>>>>> maven_test:src/main/java/org/hawkular/StatisticalAlgo.java
 
 public interface StatisticalAlgo {
 
