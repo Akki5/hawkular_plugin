@@ -20,7 +20,7 @@ public class PluginDemo {
 		else
 			pluginsDir = "org.hawkular.plugins";
 		
-		jarDir = "target\\hawkular_plugin-1.0-SNAPSHOT.jar";
+		jarDir = "target" + File.separator + "hawkular_plugin-1.0-SNAPSHOT.jar";
 		
 		plugins = new ArrayList();
 
