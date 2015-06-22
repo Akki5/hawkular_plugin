@@ -49,6 +49,10 @@ public class PluginDemo {
 
 	}
 	
+	public int no_of_plugins(){
+		return plugins.size();
+	}
+	
 	public double runPlugins(int i, int A[]) {
 	
 			((StatisticalAlgo)plugins.get(i)).setParameter(A);
