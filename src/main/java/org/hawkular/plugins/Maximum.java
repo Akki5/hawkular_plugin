@@ -1,9 +1,10 @@
-
 /**
  * This plugin returns maximum of the data list.
  */
+ package org.hawkular.plugins;
  
 import java.util.Arrays;
+import org.hawkular.*;
 public class Maximum implements StatisticalAlgo {
 
 	int A[];
