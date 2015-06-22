@@ -56,7 +56,7 @@ public class PluginDemo {
 		ClassLoader cl = new PluginClassLoader(dir);
 		if (dir.exists()) {
 			
-			String[] Class_names = {"Average","Minimum","Maximum","Mode","StdDev"};
+			String[] Class_names = {"Average","Maximum","Minimum","Mode","StdDev"};
 			for(int i=0;i<Class_names.length;i++)
 			{
 				Class c = cl.loadClass(Class_names[i]);
