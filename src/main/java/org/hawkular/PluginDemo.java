@@ -42,7 +42,10 @@ public class PluginDemo {
 		// take input from user and use the concerned plugin
 		for(;;)
 		{
-			System.out.println("Enter the choice number corresponding to the required mathematical operation.\n'1' for Average\n'2' for Maximum\n'3' for Minimum\n'4' for Mode\n'5' for Standard Deviation\n'0' to quit");
+			System.out.println("Enter the choice number corresponding to the required mathematical operation.\n");
+			for(int i=0;i<plugins.size();i++)
+				System.out.println("'" + (i+1) + "' for " + ((StatisticalAlgo)plugins.get(i)).getPluginName() + "\n");
+			System.out.println("'0' to quit");
 			choice = in.nextInt();
 			if(choice==0)
 				break;
