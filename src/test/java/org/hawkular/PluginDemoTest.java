@@ -11,23 +11,43 @@ import static org.junit.Assert.*;
 public class PluginDemoTest {
 
 	//initializing an array for test purposes
-	int A[] = new int[]{3,5,9,2,4,7};
-	// storing pre-defined results
-	double result[] = new double[]{5.0,9.0,2.0,4.5,2.6076809620810595};
+	int A[];
+	String Class_names[];
 	
-	PluginDemo demo = new PluginDemo(args);
+	// storing pre-defined results
+	Map<String, Double> result;
+	
+	PluginDemo demo;
+	
+	//execute only once, in the starting 
+    @BeforeClass
+    public static void beforeClass() 
+    {
+		A = new int[]{3,5,9,2,4,7};
+		Class_names = new String[]{"Average","Minimum","Maximum","Mode","StdDev"};
+		
+		result = new HashMap<String, Double>();
+		
+		// Add some vehicles.
+        result.put("Average", 5.0);
+        result.put("Maximum", 9.0);
+        result.put("Minimum", 2.0);
+        result.put("Mode", 4.5);
+		result.put("StdDev", 2.6076809620810595);
+		
+		// load all classes in plugin directory via classloader class
+		demo = new PluginDemo(args);
+		demo.getPlugins();
+
+    }
 
 	@Test
 	public void checkAllPlugins() throws Exception
-	{
+	{	
 		
-		// load all classes in plugin directory via classloader class
-		demo.getPlugins();
-		
-		// take input from user and use the concerned plugin
 		for(i=0;i<demo.no_of_plugins();i++)
 		{
-			assertEquals(result[i],demo.runPlugins(i,A));
+			assertEquals(result.get(ClassNames[i]),demo.runPlugins(ClassNames[i],A));
 		}
 	}
 	
@@ -35,101 +55,46 @@ public class PluginDemoTest {
 	public void checkPluginAverage() throws Exception
 	{
 		
-		// load all classes in plugin directory via classloader class
-		demo.getPlugins();
-		
 		String pluginName = "Average";
 		
-		// take input from user and use the concerned plugin
-		for(i=0;i<demo.no_of_plugins();i++)
-		{
-			if((demo.plugins(i).getPluginName()).equals(pluginName))
-			{
-				assertEquals(result[i],demo.runPlugins(i,A));
-				break;
-			}
-		}
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
+		
 	}
 	
 	@Test
 	public void checkPluginMaximum() throws Exception
 	{
 		
-		// load all classes in plugin directory via classloader class
-		demo.getPlugins();
-		
 		String pluginName = "Maximum";
 		
-		// take input from user and use the concerned plugin
-		for(i=0;i<demo.no_of_plugins();i++)
-		{
-			if((demo.plugins(i).getPluginName()).equals(pluginName))
-			{
-				assertEquals(result[i],demo.runPlugins(i,A));
-				break;
-			}
-		}
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
 	}
 	
 	@Test
 	public void checkPluginMinimum() throws Exception
 	{
 		
-		// load all classes in plugin directory via classloader class
-		demo.getPlugins();
-		
 		String pluginName = "Minimum";
 		
-		// take input from user and use the concerned plugin
-		for(i=0;i<demo.no_of_plugins();i++)
-		{
-			if((demo.plugins(i).getPluginName()).equals(pluginName))
-			{
-				assertEquals(result[i],demo.runPlugins(i,A));
-				break;
-			}
-		}
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
 	}
 	
 	@Test
 	public void checkPluginMode() throws Exception
 	{
 		
-		// load all classes in plugin directory via classloader class
-		demo.getPlugins();
-		
 		String pluginName = "Mode";
 		
-		// take input from user and use the concerned plugin
-		for(i=0;i<demo.no_of_plugins();i++)
-		{
-			if((demo.plugins(i).getPluginName()).equals(pluginName))
-			{
-				assertEquals(result[i],demo.runPlugins(i,A));
-				break;
-			}
-		}
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
 	}
 	
 	@Test
 	public void checkPluginStdDev() throws Exception
 	{
 		
-		// load all classes in plugin directory via classloader class
-		demo.getPlugins();
-		
 		String pluginName = "Standard Deviation";
 		
-		// take input from user and use the concerned plugin
-		for(i=0;i<demo.no_of_plugins();i++)
-		{
-			if((demo.plugins(i).getPluginName()).equals(pluginName))
-			{
-				assertEquals(result[i],demo.runPlugins(i,A));
-				break;
-			}
-		}
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
 	}
 	
 }
-
