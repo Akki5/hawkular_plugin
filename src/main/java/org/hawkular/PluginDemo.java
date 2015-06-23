@@ -11,7 +11,7 @@ public class PluginDemo {
 	String jarDir, pluginsDir;
 
 	// a list where we keep an initialized object of each plugin class
-	List plugins;
+	Map<String, StatisticalAlgo> plugins;
 	
 	// constructor to initialize plugin directory and the list plugins
 	PluginDemo (String args[]) {
@@ -20,9 +20,9 @@ public class PluginDemo {
 		else
 			pluginsDir = "org.hawkular.plugins";
 		
-		jarDir = "target\\hawkular_plugin-1.0-SNAPSHOT.jar";
+		jarDir = "target" + File.separator + "hawkular_plugin-1.0-SNAPSHOT.jar";
 		
-		plugins = new ArrayList();
+		plugins = new HashMap<String, StatisticalAlgo>();
 
 	}
 	
@@ -40,7 +40,7 @@ public class PluginDemo {
 					if (intf[j].getName().equals("org.hawkular.StatisticalAlgo")) {
 						// the following line assumes that StatisticalAlgo has a no-argument constructor
 						StatisticalAlgo pf = (StatisticalAlgo) c.newInstance();
-						plugins.add(pf);
+						plugins.put(Class_names[i], pf);
 						continue;
 					}
 				}
@@ -53,10 +53,10 @@ public class PluginDemo {
 		return plugins.size();
 	}
 	
-	public double runPlugins(int i, int A[]) {
+	public double runPlugins(String name, int A[]) {
 	
-			((StatisticalAlgo)plugins.get(i)).setParameter(A);
-			return ((StatisticalAlgo)plugins.get(i)).getResult();
+			((StatisticalAlgo)plugins.get(name)).setParameter(A);
+			return ((StatisticalAlgo)plugins.get(name)).getResult();
 			
 		}
 
