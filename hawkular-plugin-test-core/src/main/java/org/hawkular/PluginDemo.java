@@ -52,22 +52,22 @@ public class PluginDemo {
 	}
 	
 	protected void getPlugins() throws Exception {
-		File dir  = new File(System.getProperty("user.dir")+ File.separator + jarDir);
-		ClassLoader cl = new PluginClassLoader(dir);
-		if (dir.exists()) {
-			
-			String[] Class_names = {"Average","Minimum","Maximum","Mode","StdDev"};
-			for(int i=0;i<Class_names.length;i++)
-			{
-				Class c = cl.loadClass(Class_names[i]);
-				Class[] intf = c.getInterfaces();
-				for (int j=0; j<intf.length; j++) {
-					if (intf[j].getName().equals("org.hawkular.StatisticalAlgo")) {
-						// the following line assumes that StatisticalAlgo has a no-argument constructor
-						StatisticalAlgo pf = (StatisticalAlgo) c.newInstance();
-						plugins.add(pf);
-						continue;
-					}
+		File dir;
+		ClassLoader cl;
+		
+		String[] Class_names = {"Average","Maximum","Minimum","Mode","StdDev"};
+		for(int i=0;i<Class_names.length;i++)
+		{
+			dir = new File(System.getProperty("user.dir")+ File.separator + "target" + File.separator + "hawkular-plugin-test-plugin_"+ Class_names[i] + "-1.0-SNAPSHOT.jar");
+			cl = new PluginClassLoader(dir);
+			Class c = cl.loadClass(Class_names[i]);
+			Class[] intf = c.getInterfaces();
+			for (int j=0; j<intf.length; j++) {
+				if (intf[j].getName().equals("org.hawkular.StatisticalAlgo")) {
+					// the following line assumes that StatisticalAlgo has a no-argument constructor
+					StatisticalAlgo pf = (StatisticalAlgo) c.newInstance();
+					plugins.add(pf);
+					continue;
 				}
 			}
 		}

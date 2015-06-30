@@ -7,6 +7,11 @@
   <version>1.0-SNAPSHOT</version>
   <name>hawkular-plugin-test</name>
   <url>http://maven.apache.org</url>
+  
+  <properties>
+    <MyDir>target/testing</MyDir>
+  </properties>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -19,5 +24,9 @@
     <module>hawkular-plugin-test-core</module>
     <module>hawkular-plugin-test-plugin_Average</module>
     <module>hawkular-plugin-test-plugin_Maximum</module>
+	<module>hawkular-plugin-test-plugin_Minimum</module>
+	<module>hawkular-plugin-test-plugin_Mode</module>
+	<module>hawkular-plugin-test-plugin_StdDev</module>
   </modules>
+  
 </project>
