@@ -8,10 +8,10 @@ import java.net.URL;
 public class PluginDemo {
 
 	// the directory where we keep the plugin classes
-	String jarDir, pluginsDir;
-
+	String pluginsDir;
+	
 	// a list where we keep an initialized object of each plugin class
-	List plugins;
+	Map<String, StatisticalAlgo> plugins;
 	
 	// constructor to initialize plugin directory and the list plugins
 	PluginDemo (String args[]) {
@@ -20,9 +20,7 @@ public class PluginDemo {
 		else
 			pluginsDir = "org.hawkular.plugins";
 		
-		jarDir = "target\\hawkular_plugin-1.0-SNAPSHOT.jar";
-		
-		plugins = new ArrayList();
+		plugins = new HashMap<String, StatisticalAlgo>();
 
 	}
 	
@@ -32,7 +30,7 @@ public class PluginDemo {
 		
 		//initializing a static array for test purposes
 		int A[] = new int[]{3,5,9,2,4,7};
-		int choice=0;
+		String choice=0;
 		
 		PluginDemo demo = new PluginDemo(args);
 		
@@ -42,23 +40,23 @@ public class PluginDemo {
 		// take input from user and use the concerned plugin
 		for(;;)
 		{
-			System.out.println("Enter the choice number corresponding to the required mathematical operation.\n'1' for Average\n'2' for Maximum\n'3' for Minimum\n'4' for Mode\n'5' for Standard Deviation\n'0' to quit");
-			choice = in.nextInt();
-			if(choice==0)
+			System.out.println("Enter the plugin name you want to use\nAverage\nMaximum\nMinimum\nMode\nStandard Deviation\nQuit");
+			plugin_choice = in.next();
+			if(plugin_choice=="Quit")
 				break;
-			demo.runPlugins(choice-1,A);
+			System.out.println(demo.runPlugins(plugin_choice,A));
 		}
-			
+		
 	}
 	
 	protected void getPlugins() throws Exception {
-		File dir;
+		File jarDir;
 		ClassLoader cl;
 		
 		String[] Class_names = {"Average","Maximum","Minimum","Mode","StdDev"};
 		for(int i=0;i<Class_names.length;i++)
 		{
-			dir = new File(System.getProperty("user.dir")+ File.separator + "target" + File.separator + "hawkular-plugin-test-plugin_"+ Class_names[i] + "-1.0-SNAPSHOT.jar");
+			jarDir = new File(System.getProperty("user.dir")+ File.separator + "target" + File.separator + "hawkular-plugin_"+ Class_names[i] + "-1.0-SNAPSHOT.jar");
 			cl = new PluginClassLoader(dir);
 			Class c = cl.loadClass(Class_names[i]);
 			Class[] intf = c.getInterfaces();
@@ -66,7 +64,7 @@ public class PluginDemo {
 				if (intf[j].getName().equals("org.hawkular.StatisticalAlgo")) {
 					// the following line assumes that StatisticalAlgo has a no-argument constructor
 					StatisticalAlgo pf = (StatisticalAlgo) c.newInstance();
-					plugins.add(pf);
+					plugins.put(Class_names[i], pf);
 					continue;
 				}
 			}
@@ -74,12 +72,15 @@ public class PluginDemo {
 
 	}
 	
-	protected void runPlugins(int i, int A[]) {
+	public int no_of_plugins(){
+		return plugins.size();
+	}
 	
-			((StatisticalAlgo)plugins.get(i)).setParameter(A);
-			System.out.println(((StatisticalAlgo)plugins.get(i)).getResult());
+	public double runPlugins(String name, int A[]) {
+	
+			((StatisticalAlgo)plugins.get(name)).setParameter(A);
+			return ((StatisticalAlgo)plugins.get(name)).getResult();
 			
-		}
-
+	}
+	
 }
-
