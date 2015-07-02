@@ -1,38 +1,100 @@
 package org.hawkular;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.io.*;
+import java.util.*;
+import java.net.URLClassLoader;
+import java.net.URL;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+public class PluginDemoTest {
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+	//initializing an array for test purposes
+	int A[];
+	String Class_names[];
+	
+	// storing pre-defined results
+	Map<String, Double> result;
+	
+	PluginDemo demo;
+	
+	//execute only once, in the starting 
+        @BeforeClass
+        public static void beforeClass() 
+        {
+		A = new int[]{3,5,9,2,4,7};
+		Class_names = new String[]{"Average","Minimum","Maximum","Mode","StdDev"};
+		
+		result = new HashMap<String, Double>();
+		
+		// Add some vehicles.
+	        result.put("Average", 5.0);
+	        result.put("Maximum", 9.0);
+	        result.put("Minimum", 2.0);
+	        result.put("Mode", 4.5);
+		result.put("StdDev", 2.6076809620810595);
+		
+		// load all classes in plugin directory via classloader class
+		demo = new PluginDemo(args);
+		demo.getPlugins();
+
+        }
+
+	@Test
+	public void checkAllPlugins() throws Exception
+	{	
+		
+		for(i=0;i<demo.no_of_plugins();i++)
+		{
+			assertEquals(result.get(ClassNames[i]),demo.runPlugins(ClassNames[i],A));
+		}
+	}
+	
+	@Test
+	public void checkPluginAverage() throws Exception
+	{
+		
+		String pluginName = "Average";
+		
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
+		
+	}
+	
+	@Test
+	public void checkPluginMaximum() throws Exception
+	{
+		
+		String pluginName = "Maximum";
+		
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
+	}
+	
+	@Test
+	public void checkPluginMinimum() throws Exception
+	{
+		
+		String pluginName = "Minimum";
+		
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
+	}
+	
+	@Test
+	public void checkPluginMode() throws Exception
+	{
+		
+		String pluginName = "Mode";
+		
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
+	}
+	
+	@Test
+	public void checkPluginStdDev() throws Exception
+	{
+		
+		String pluginName = "Standard Deviation";
+		
+		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
+	}
+	
 }
