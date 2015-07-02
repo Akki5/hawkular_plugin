@@ -2,15 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.hawkular</groupId>
-  <artifactId>hawkular-plugin-test</artifactId>
+  <artifactId>hawkular-plugin</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>hawkular-plugin-test</name>
+  <name>hawkular-plugin</name>
   <url>http://maven.apache.org</url>
-  
-  <properties>
-    <MyDir>target/testing</MyDir>
-  </properties>
   
   <dependencies>
     <dependency>
@@ -21,12 +17,12 @@
     </dependency>
   </dependencies>
   <modules>
-    <module>hawkular-plugin-test-core</module>
-    <module>hawkular-plugin-test-plugin_Average</module>
-    <module>hawkular-plugin-test-plugin_Maximum</module>
-	<module>hawkular-plugin-test-plugin_Minimum</module>
-	<module>hawkular-plugin-test-plugin_Mode</module>
-	<module>hawkular-plugin-test-plugin_StdDev</module>
+    	<module>hawkular-plugin-core</module>
+	<module>hawkular-plugin_Average</module>
+	<module>hawkular-plugin_Maximum</module>
+	<module>hawkular-plugin_Minimum</module>
+	<module>hawkular-plugin_Mode</module>
+	<module>hawkular-plugin_StdDev</module>
   </modules>
   
 </project>
