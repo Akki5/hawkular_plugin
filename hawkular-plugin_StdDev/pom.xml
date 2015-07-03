@@ -4,19 +4,19 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.hawkular</groupId>
-    <artifactId>hawkular-plugin-test</artifactId>
+    <artifactId>hawkular-plugin</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>org.hawkular.plugins</groupId>
-  <artifactId>hawkular-plugin-test-plugin_StdDev</artifactId>
+  <artifactId>hawkular-plugin_StdDev</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>hawkular-plugin-test-plugin_StdDev</name>
+  <name>hawkular-plugin_StdDev</name>
   <url>http://maven.apache.org</url>
   <dependencies>
   
 	 <dependency>
       <groupId>org.hawkular</groupId>
-      <artifactId>hawkular-plugin-test-core</artifactId>
+      <artifactId>hawkular-plugin-core</artifactId>
       <version>${project.version}</version>
     </dependency>
   
