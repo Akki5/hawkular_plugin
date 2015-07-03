@@ -42,7 +42,7 @@ public class PluginDemo {
 		{
 			System.out.println("Enter the plugin name you want to use\nAverage\nMaximum\nMinimum\nMode\nStandard Deviation\nQuit");
 			plugin_choice = in.next();
-			if(plugin_choice=="Quit")
+			if(plugin_choice.equals("Quit"))
 				break;
 			System.out.println(demo.runPlugins(plugin_choice,A));
 		}
