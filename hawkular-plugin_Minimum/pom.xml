@@ -16,7 +16,7 @@
   
 	 <dependency>
       <groupId>org.hawkular</groupId>
-      <artifactId>hawkular-core</artifactId>
+      <artifactId>hawkular-plugin-core</artifactId>
       <version>${project.version}</version>
     </dependency>
   
