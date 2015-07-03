@@ -30,7 +30,7 @@ public class PluginDemo {
 		
 		//initializing a static array for test purposes
 		int A[] = new int[]{3,5,9,2,4,7};
-		String choice=0;
+		String plugin_choice;
 		
 		PluginDemo demo = new PluginDemo(args);
 		
@@ -57,7 +57,7 @@ public class PluginDemo {
 		for(int i=0;i<Class_names.length;i++)
 		{
 			jarDir = new File(System.getProperty("user.dir")+ File.separator + "target" + File.separator + "hawkular-plugin_"+ Class_names[i] + "-1.0-SNAPSHOT.jar");
-			cl = new PluginClassLoader(dir);
+			cl = new PluginClassLoader(jarDir);
 			Class c = cl.loadClass(Class_names[i]);
 			Class[] intf = c.getInterfaces();
 			for (int j=0; j<intf.length; j++) {
