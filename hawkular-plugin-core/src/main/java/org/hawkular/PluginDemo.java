@@ -30,6 +30,7 @@ public class PluginDemo {
 		
 		//initializing a static array for test purposes
 		int A[] = new int[]{3,5,9,2,4,7};
+		int window_size = 5;
 		String plugin_choice;
 		
 		PluginDemo demo = new PluginDemo(args);
@@ -44,7 +45,7 @@ public class PluginDemo {
 			plugin_choice = in.next();
 			if(plugin_choice.equals("Quit"))
 				break;
-			System.out.println(demo.runPlugins(plugin_choice,A));
+			demo.runPlugins(plugin_choice, A, window_size);
 		}
 		
 	}
@@ -76,10 +77,13 @@ public class PluginDemo {
 		return plugins.size();
 	}
 	
-	public double runPlugins(String name, int A[]) {
+	public double runPlugins(String name, int A[], int window_size) {
 	
-			((StatisticalAlgo)plugins.get(name)).setParameter(A);
-			return ((StatisticalAlgo)plugins.get(name)).getResult();
+		IntStream.range(0, A.length - 1).mapToDouble(
+			i -> {
+				((StatisticalAlgo)plugins.get(name)).pushPoint(A[i]);
+				((StatisticalAlgo)plugins.get(name)).getResult()
+			});
 			
 	}
 	
