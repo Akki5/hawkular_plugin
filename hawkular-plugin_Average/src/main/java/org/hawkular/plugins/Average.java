@@ -10,10 +10,6 @@ public class Average implements StatisticalAlgo {
 
 	List elements;
 	int window_size;
-	
-	public String getPluginName() {
-		return "Average";
-	}
 
 	Average(int window_size)
 	{
@@ -46,7 +42,7 @@ public class Average implements StatisticalAlgo {
 		for(int i=0;i<size;i++)
 			sum+=elements[i];
 		avg = sum/(size*1.0);
-		return avg;
+		System.out.println(avg);
 	}
 
 	// yes, ths operation can fail, but we are going to ignore this here
