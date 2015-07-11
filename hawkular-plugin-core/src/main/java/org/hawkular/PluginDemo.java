@@ -82,7 +82,7 @@ public class PluginDemo {
 		IntStream.range(0, A.length - 1).mapToDouble(
 			i -> {
 				((StatisticalAlgo)plugins.get(name)).pushPoint(A[i]);
-				((StatisticalAlgo)plugins.get(name)).getResult()
+				((StatisticalAlgo)plugins.get(name)).getResult();
 			});
 			
 	}
