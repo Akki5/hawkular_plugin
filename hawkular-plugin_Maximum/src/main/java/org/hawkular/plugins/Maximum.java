@@ -39,7 +39,7 @@ public class Maximum implements StatisticalAlgo {
 			return -1.0;
 			
 		Collections.sort(elements);
-		return elements.get(window_size-1)*1.0;
+		return elements.get(window_size-1);
 	}
 
 	/* yes, ths operation can fail, but we are going to ignore this here
