@@ -4,45 +4,46 @@
  */
  package org.hawkular.plugins;
  
-import java.util.Arrays;
+import java.util.*;
 import org.hawkular.*;
 public class Average implements StatisticalAlgo {
 
-	List elements;
+	List<Double> elements;
 	int window_size;
-
-	Average(int window_size)
-	{
-		this.window_size = window_size;
-		elements = new ArrayList();
-	}
 	
 	public String getPluginName() {
 		return "Average";
 	}
 
-	public void setPoints (List values) {
-		elements = values;
+	public void set_params(int size) {
+		elements = new ArrayList<Double>();
+		window_size = size;
 	}
-	
-	public void pushPoint (int value) {
+
+	public void pushPoint (double value) {
 		if(elements.size()<window_size)
 			elements.add(value);
 		else
 		{
-			for(int i=0;i<window_size;i++)
-				elements[i] = elements[i+1];
-			elements[window_size-1] = value;
+			for(int i=0;i<window_size-1;i++)
+			{
+				elements.set(i,elements.get(i+1));
+			}
+			elements.set(window_size-1, value);
 		}
 	}
-
+	
 	public double getResult() {
-		int size = elements.length,sum=0;
-		double avg=0.0;
+	
+		int size = elements.size();
+		if(size<window_size)
+			return -1.0;
+			
+		double sum=0.0,avg=0.0;
 		for(int i=0;i<size;i++)
-			sum+=elements[i];
+			sum+=elements.get(i);
 		avg = sum/(size*1.0);
-		System.out.println(avg);
+		return avg;
 	}
 
 	// yes, ths operation can fail, but we are going to ignore this here
@@ -50,3 +51,4 @@ public class Average implements StatisticalAlgo {
 		return false;
 	}
 }
+
