@@ -3,32 +3,51 @@
  */
  package org.hawkular.plugins;
  
-import java.util.Arrays;
+import java.util.*;
 import java.math.*;
 import org.hawkular.*;
 import org.hawkular.plugins.*;
 public class StdDev implements StatisticalAlgo {
 
-	int A[];
+	List<Double> elements;
+	int window_size;
 	
 	public String getPluginName() {
-		return "Standard Deviation";
+		return "Maximum";
 	}
 
-	public void setParameter (int param[]) {
-		A = param;
+	public void set_params(int size) {
+		elements = new ArrayList<Double>();
+		window_size = size;
+	}
+
+	public void pushPoint (double value) {
+		if(elements.size()<window_size)
+			elements.add(value);
+		else
+		{
+			for(int i=0;i<window_size-1;i++)
+			{
+				elements.set(i,elements.get(i+1));
+			}
+			elements.set(window_size-1, value);
+		}
 	}
 
 	public double getResult() {
-		int size = A.length,sum=0;
+	
+		int size = elements.size(),sum=0;
+		if(size<window_size)
+			return -1.0;
+			
 		double avg=0.0;
 		for(int i=0;i<size;i++)
-			sum+=A[i];
+			sum+=elements.get(i);
 		avg = sum/(size*1.0);
 		
 		double sqsum = 0.0,res;
 		for(int i=0;i<size;i++)
-			sqsum += (A[i]-avg)*(A[i]-avg);
+			sqsum += (elements.get(i)-avg)*(elements.get(i)-avg);
 		sqsum/=(size-1);
 		res = Math.sqrt(sqsum);
 		return res;
