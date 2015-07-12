@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.*;
 import java.net.URLClassLoader;
 import java.net.URL;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 
 public class PluginDemo {
 
@@ -29,7 +31,7 @@ public class PluginDemo {
 		Scanner in = new Scanner(System.in);
 		
 		//initializing a static array for test purposes
-		int A[] = new int[]{3,5,9,2,4,7};
+		double A[] = new double[]{1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0};
 		int window_size = 5;
 		String plugin_choice;
 		
@@ -77,14 +79,22 @@ public class PluginDemo {
 		return plugins.size();
 	}
 	
-	public double runPlugins(String name, int A[], int window_size) {
+	public void runPlugins(String name, double A[], int window_size) {
 	
-		IntStream.range(0, A.length - 1).mapToDouble(
-			i -> {
-				((StatisticalAlgo)plugins.get(name)).pushPoint(A[i]);
-				((StatisticalAlgo)plugins.get(name)).getResult();
-			});
-			
+		StatisticalAlgo pf = ((StatisticalAlgo)plugins.get(name));
+		pf.set_params(window_size);
+		
+		IntStream.range(0, A.length)
+		.mapToDouble(
+					i -> {
+						pf.pushPoint(A[i]);
+						return pf.getResult();
+					})
+		.forEach( 
+				i -> {
+						if(i!=-1.0)
+							System.out.println(i);
+				});
 	}
 	
 }
