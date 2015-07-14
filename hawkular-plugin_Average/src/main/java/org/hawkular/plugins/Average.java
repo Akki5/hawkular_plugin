@@ -29,9 +29,6 @@ public class Average implements StatisticalAlgo {
 	public double getResult() {
 	
 		int size = elements.size();
-		if(size<window_size)
-			return -1.0;
-			
 		double sum=0.0,avg=0.0;
 		for(int i=0;i<size;i++)
 			sum+=elements.get(i);
