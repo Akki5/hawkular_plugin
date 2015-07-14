@@ -20,16 +20,9 @@ public class Maximum implements StatisticalAlgo {
 	}
 
 	public void pushPoint (double value) {
-		if(elements.size()<window_size)
-			elements.add(value*1.0);
-		else
-		{
-			for(int i=0;i<window_size-1;i++)
-			{
-				elements.set(i,elements.get(i+1));
-			}
-			elements.set(window_size-1, value*1.0);
-		}
+		if(elements.size()>=window_size)
+			elements.remove(0);
+		elements.add(value);
 	}
 	
 	public double getResult() {
