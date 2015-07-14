@@ -28,9 +28,6 @@ public class Minimum implements StatisticalAlgo {
 	public double getResult() {
 	
 		int size = elements.size();
-		if(size<window_size)
-			return -1.0;
-			
 		Collections.sort(elements);
 		return elements.get(0);
 	}
