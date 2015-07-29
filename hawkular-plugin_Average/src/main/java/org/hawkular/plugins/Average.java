@@ -6,6 +6,9 @@
  
 import java.util.*;
 import org.hawkular.*;
+
+import rx.Observable;
+
 public class Average implements StatisticalAlgo {
 
 	List<Double> elements;
@@ -19,7 +22,7 @@ public class Average implements StatisticalAlgo {
 		elements = new ArrayList<Double>();
 		window_size = size;
 	}
-
+/*
 	public void pushPoint (double value) {
 		if(elements.size()>=window_size)
 			elements.remove(0);
@@ -35,7 +38,22 @@ public class Average implements StatisticalAlgo {
 		avg = sum/(size*1.0);
 		return avg;
 	}
-
+*/
+	Observable<Observable<T>> slice_wind(Observable<T> elements) {
+		return elements.window(window_size);
+	}
+	
+	Observable<T> compute(Observable<Observable<T>> wind_list) {
+		
+		Iterator<Observable<T>> iterator = wind_list.toBlocking().toIterable().iterator();
+		Observable<T> result = Observable.create();
+		while(iterator.hasNext())
+		{
+			result.onNext((iterator.next()).averageDouble());
+		}
+		return result;
+	}
+	
 	// yes, ths operation can fail, but we are going to ignore this here
 	public boolean hasError() {
 		return false;

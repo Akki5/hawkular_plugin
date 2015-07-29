@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
+import rx.Observable;
+
 public class PluginDemo {
 
 	// the directory where we keep the plugin classes
@@ -34,6 +36,8 @@ public class PluginDemo {
 		double A[] = new double[]{1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0};
 		int window_size = 5;
 		String plugin_choice;
+		
+		Observable elements;
 		
 		PluginDemo demo = new PluginDemo(args);
 		

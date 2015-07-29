@@ -15,14 +15,18 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+	
+	<dependency>
+    <groupId>io.reactivex</groupId>
+    <artifactId>rxjava</artifactId>
+    <version>1.0.13</version>
+	</dependency>
+	
   </dependencies>
   <modules>
     	<module>hawkular-plugin-core</module>
 		<module>hawkular-plugin_Average</module>
 		<module>hawkular-plugin_Maximum</module>
-		<module>hawkular-plugin_Minimum</module>
-		<module>hawkular-plugin_Mode</module>
-		<module>hawkular-plugin_StdDev</module>
   </modules>
   
   <build>
