@@ -8,13 +8,13 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>org.hawkular.plugins</groupId>
-  <artifactId>hawkular-plugin_Maximum</artifactId>
+  <artifactId>hawkular-plugin_Minimum</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>hawkular-plugin_Maximum</name>
+  <name>hawkular-plugin_Minimum</name>
   <url>http://maven.apache.org</url>
   <dependencies>
   
-	<dependency>
+	 <dependency>
       <groupId>org.hawkular</groupId>
       <artifactId>hawkular-plugin-core</artifactId>
       <version>${project.version}</version>

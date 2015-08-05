@@ -14,9 +14,11 @@ public interface StatisticalAlgo {
 	// retrieve a result from the plugin
 	//public double getResult();
 	
-	Observable<Observable<T>> slice_wind(Observable<T> elements);
+	//Observable<Observable<T>> slice_wind(Observable<T> elements);
 	
-	Observable<T> compute(Observable<Observable<T>> wind_list);
+	//Observable<T> compute(Observable<Observable<T>> wind_list);
+	
+	public void compute(Observable<Integer> elements);
 
 	// can be called to determine whether the plugin
 	// aborted execution due to an error condition

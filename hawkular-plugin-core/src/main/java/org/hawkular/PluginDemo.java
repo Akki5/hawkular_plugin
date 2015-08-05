@@ -34,10 +34,11 @@ public class PluginDemo {
 		
 		//initializing a static array for test purposes
 		double A[] = new double[]{1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0};
+		Integer[] testInts = {1,2,3,4,5,6,7,8,9,10,11,12};
 		int window_size = 5;
 		String plugin_choice;
 		
-		Observable elements;
+		Observable<Integer> elements = Observable.from(testInts);
 		
 		PluginDemo demo = new PluginDemo(args);
 		
@@ -51,7 +52,7 @@ public class PluginDemo {
 			plugin_choice = in.next();
 			if(plugin_choice.equals("Quit"))
 				break;
-			demo.runPlugins(plugin_choice, A, window_size);
+			demo.runPlugins(plugin_choice, A, window_size, elements);
 		}
 		
 	}
@@ -60,7 +61,7 @@ public class PluginDemo {
 		File jarDir;
 		ClassLoader cl;
 		
-		String[] Class_names = {"Average","Maximum","Minimum","Mode","StdDev"};
+		String[] Class_names = {"Average","Maximum","Minimum"};
 		for(int i=0;i<Class_names.length;i++)
 		{
 			jarDir = new File(System.getProperty("user.dir")+ File.separator + "target" + File.separator + "hawkular-plugin_"+ Class_names[i] + "-1.0-SNAPSHOT.jar");
@@ -83,11 +84,12 @@ public class PluginDemo {
 		return plugins.size();
 	}
 	
-	public void runPlugins(String name, double A[], int window_size) {
+	public void runPlugins(String name, double A[], int window_size, Observable elements) {
 	
 		StatisticalAlgo pf = ((StatisticalAlgo)plugins.get(name));
 		pf.set_params(window_size);
-		
+		pf.compute(elements);
+		/*
 		IntStream.range(0, A.length)
 		.mapToDouble(
 					i -> {
@@ -99,6 +101,8 @@ public class PluginDemo {
 						if(i!=-1.0)
 							System.out.println(i);
 				});
+				
+		*/
 	}
 	
 }

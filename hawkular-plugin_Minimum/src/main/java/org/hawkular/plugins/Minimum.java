@@ -1,6 +1,5 @@
-
 /**
- * This plugin returns average of the data list.
+ * This plugin returns maximum of the data list.
  */
  package org.hawkular.plugins;
  
@@ -10,12 +9,12 @@ import org.hawkular.*;
 import rx.Observable;
 import rx.observables.MathObservable;
 
-public class Average implements StatisticalAlgo {
+public class Minimum implements StatisticalAlgo {
 
 	int window_size;
 	
 	public String getPluginName() {
-		return "Average";
+		return "Minimum";
 	}
 
 	public void set_params(int size) {
@@ -31,34 +30,37 @@ public class Average implements StatisticalAlgo {
 	public double getResult() {
 	
 		int size = elements.size();
-		double sum=0.0,avg=0.0;
-		for(int i=0;i<size;i++)
-			sum+=elements.get(i);
-		avg = sum/(size*1.0);
-		return avg;
+		Collections.sort(elements);
+		return elements.get(window_size-1);
 	}
 
-	Observable<Observable<T>> sliding_wind(Observable<T> elements) {
+	Observable<Observable<T>> slice_wind(Observable<T> elements) {
 		return elements.window(window_size);
 	}
 	
 	Observable<T> compute(Observable<Observable<T>> wind_list) {
 		
-		return wind_list.map(i -> i.averageDouble());
+		Iterator<Observable<T>> iterator = wind_list.toBlocking().toIterable().iterator();
+		Observable<T> result = Observable.create();
+		while(iterator.hasNext())
+		{
+			result.onNext((iterator.next()).max());
+		}
+		return result;
 	}
 	
 */
-
+	
 	public void compute(Observable<Integer> elements) {
 		
 		elements.window(window_size, window_size)
-                .flatMap(MathObservable::averageInteger)
+                .flatMap(MathObservable::min)
                 .subscribe(i -> System.out.println(i));
 	}
 	
-	// yes, ths operation can fail, but we are going to ignore this here
+	/* yes, ths operation can fail, but we are going to ignore this here
 	public boolean hasError() {
 		return false;
-	}
+	}*/
 }
 
