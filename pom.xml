@@ -34,6 +34,7 @@
     	<module>hawkular-plugin-core</module>
 		<module>hawkular-plugin_Average</module>
 		<module>hawkular-plugin_Maximum</module>
+		<module>hawkular-plugin_Minimum</module>
   </modules>
   
   <build>
