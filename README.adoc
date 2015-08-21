@@ -66,3 +66,12 @@ This computes the standard deviation of all the subsequences of the metrics of a
 This has only one implementations as of now dealing with list of elements. +
 Its implementation dealing with observable of elements needs to be done.
 |=======================
+
+== Create a new plugin
+
+Though, currently this project contains 5 plugins that are mentioned above , the goal of the project also includes the implementation of more complicated plugins. For this purpose, here are the necessary steps for implementing a 'new plugin' that would prove to be helpful while creating more complicated plugins later on. Steps here have been shown using `Average` as an example.
+
+* Create a new project `hawkular-plugin_Average`.
+* Add an implementation of `org.hawkular.StatisticalAlgo` interface.
+* Add a plugin name to the implementation with the `org.hawkular.plugins.Avergae` annotation.
+After this, only work left is to test the new plugin using `PluginDemoTest`.
