@@ -74,4 +74,5 @@ Though, currently this project contains 5 plugins that are mentioned above , the
 * Create a new project `hawkular-plugin_Average`.
 * Add an implementation of `org.hawkular.StatisticalAlgo` interface.
 * Add a plugin name to the implementation with the `org.hawkular.plugins.Avergae` annotation.
+
 After this, only work left is to test the new plugin using `PluginDemoTest`.
