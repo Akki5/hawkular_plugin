@@ -7,13 +7,14 @@ import java.util.*;
 import java.math.*;
 import org.hawkular.*;
 import org.hawkular.plugins.*;
+
 public class StdDev implements StatisticalAlgo {
 
 	List<Double> elements;
 	int window_size;
 	
 	public String getPluginName() {
-		return "Maximum";
+		return "StdDev";
 	}
 
 	public void set_params(int size) {

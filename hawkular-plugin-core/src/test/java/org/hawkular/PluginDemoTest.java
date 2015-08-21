@@ -20,26 +20,26 @@ public class PluginDemoTest {
 	PluginDemo demo;
 	
 	//execute only once, in the starting 
-        @BeforeClass
-        public static void beforeClass() 
-        {
+	@BeforeClass
+	public static void beforeClass() 
+	{
 		A = new int[]{3,5,9,2,4,7};
 		Class_names = new String[]{"Average","Minimum","Maximum","Mode","StdDev"};
 		
 		result = new HashMap<String, Double>();
 		
-		// Add some vehicles.
-	        result.put("Average", 5.0);
-	        result.put("Maximum", 9.0);
-	        result.put("Minimum", 2.0);
-	        result.put("Mode", 4.5);
-		result.put("StdDev", 2.6076809620810595);
+		// Add results of statistical operations.
+			result.put("Average", 5.0);
+			result.put("Maximum", 9.0);
+			result.put("Minimum", 2.0);
+			result.put("Mode", 4.5);
+			result.put("StdDev", 2.6076809620810595);
 		
 		// load all classes in plugin directory via classloader class
 		demo = new PluginDemo(args);
 		demo.getPlugins();
 
-        }
+	}
 
 	@Test
 	public void checkAllPlugins() throws Exception
@@ -92,7 +92,7 @@ public class PluginDemoTest {
 	public void checkPluginStdDev() throws Exception
 	{
 		
-		String pluginName = "Standard Deviation";
+		String pluginName = "StdDev";
 		
 		assertEquals(result.get(pluginName),demo.runPlugins(pluginName,A));
 	}

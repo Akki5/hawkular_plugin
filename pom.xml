@@ -9,13 +9,29 @@
   <url>http://maven.apache.org</url>
   
   <dependencies>
+  
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+	
+	<dependency>
+    <groupId>io.reactivex</groupId>
+    <artifactId>rxjava</artifactId>
+    <version>1.0.13</version>
+	<scope>compile</scope>
+	</dependency>
+	
+	<dependency>
+    <groupId>io.reactivex</groupId>
+    <artifactId>rxjava-math</artifactId>
+    <version>1.0.0</version>
+	</dependency>
+	
   </dependencies>
+  
   <modules>
     	<module>hawkular-plugin-core</module>
 		<module>hawkular-plugin_Average</module>

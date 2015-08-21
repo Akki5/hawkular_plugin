@@ -5,13 +5,14 @@
  
 import java.util.*;
 import org.hawkular.*;
+
 public class Mode implements StatisticalAlgo {
 
 	List<Double> elements;
 	int window_size;
 	
 	public String getPluginName() {
-		return "Maximum";
+		return "Mode";
 	}
 
 	public void set_params(int size) {
@@ -32,17 +33,29 @@ public class Mode implements StatisticalAlgo {
 			return -1.0;
 			
 		Collections.sort(elements);
-		double res;
-		if(size%2!=0)
-			res = (elements.get(size/2));
-		else
-			res = (elements.get(size/2-1) + elements.get(size/2))/2.0;
+		double res,temp,max=0;
+		temp=1;
+		for(int i=1;i<size;i++)
+		{
+			if(elements.get(i)==elements.get(i-1))
+			{
+				temp++;
+				continue;
+			}
+			
+			if(temp>max)
+			{
+				max=temp;
+				temp=1;
+				res=elements.get(i-1);
+			}
+		}
 		
 		return res;
 	}
 
-	/* yes, ths operation can fail, but we are going to ignore this here
+	// yes, ths operation can fail, but we are going to ignore this here
 	public boolean hasError() {
 		return false;
-	}*/
+	}
 }

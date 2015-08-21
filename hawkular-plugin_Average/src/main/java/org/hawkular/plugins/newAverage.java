@@ -7,9 +7,11 @@
 import java.util.*;
 import org.hawkular.*;
 
+import rx.Observable;
+import rx.observables.MathObservable;
+
 public class Average implements StatisticalAlgo {
 
-	List<Double> elements;
 	int window_size;
 	
 	public String getPluginName() {
@@ -17,26 +19,16 @@ public class Average implements StatisticalAlgo {
 	}
 
 	public void set_params(int size) {
-		elements = new ArrayList<Double>();
 		window_size = size;
 	}
 
-	public void pushPoint (double value) {
-		if(elements.size()>=window_size)
-			elements.remove(0);
-		elements.add(value);
+	public void compute(Observable<Integer> elements) {
+		
+		elements.window(window_size, window_size)
+                .flatMap(MathObservable::averageInteger)
+                .subscribe(i -> System.out.println(i));
 	}
 	
-	public double getResult() {
-	
-		int size = elements.size();
-		double sum=0.0,avg=0.0;
-		for(int i=0;i<size;i++)
-			sum+=elements.get(i);
-		avg = sum/(size*1.0);
-		return avg;
-	}
-
 	// yes, ths operation can fail, but we are going to ignore this here
 	public boolean hasError() {
 		return false;

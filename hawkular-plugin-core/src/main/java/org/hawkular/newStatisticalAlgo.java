@@ -1,5 +1,7 @@
 package org.hawkular;
 
+import rx.Observable;
+
 public interface StatisticalAlgo {
 
 	// return the name of this plugin
@@ -7,10 +9,7 @@ public interface StatisticalAlgo {
 	
 	public void set_params(int size);
 
-	public void pushPoint (double value);
-
-	// retrieve a result from the plugin
-	public double getResult();
+	public void compute(Observable<Integer> elements);
 
 	// can be called to determine whether the plugin
 	// aborted execution due to an error condition

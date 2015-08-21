@@ -6,9 +6,11 @@
 import java.util.*;
 import org.hawkular.*;
 
+import rx.Observable;
+import rx.observables.MathObservable;
+
 public class Maximum implements StatisticalAlgo {
 
-	List<Double> elements;
 	int window_size;
 	
 	public String getPluginName() {
@@ -16,21 +18,14 @@ public class Maximum implements StatisticalAlgo {
 	}
 
 	public void set_params(int size) {
-		elements = new ArrayList<Double>();
 		window_size = size;
 	}
-
-	public void pushPoint (double value) {
-		if(elements.size()>=window_size)
-			elements.remove(0);
-		elements.add(value);
-	}
 	
-	public double getResult() {
-	
-		int size = elements.size();
-		Collections.sort(elements);
-		return elements.get(window_size-1);
+	public void compute(Observable<Integer> elements) {
+		
+		elements.window(window_size, window_size)
+                .flatMap(MathObservable::max)
+                .subscribe(i -> System.out.println(i));
 	}
 	
 	// yes, ths operation can fail, but we are going to ignore this here
