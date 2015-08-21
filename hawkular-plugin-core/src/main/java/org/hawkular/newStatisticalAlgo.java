@@ -2,7 +2,7 @@ package org.hawkular;
 
 import rx.Observable;
 
-public interface StatisticalAlgo {
+public interface newStatisticalAlgo {
 
 	// return the name of this plugin
 	public String getPluginName();

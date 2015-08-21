@@ -9,12 +9,12 @@ import org.hawkular.*;
 import rx.Observable;
 import rx.observables.MathObservable;
 
-public class Maximum implements StatisticalAlgo {
+public class newMaximum implements newStatisticalAlgo {
 
 	int window_size;
 	
 	public String getPluginName() {
-		return "Maximum";
+		return "newMaximum";
 	}
 
 	public void set_params(int size) {

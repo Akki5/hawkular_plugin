@@ -10,12 +10,12 @@ import org.hawkular.*;
 import rx.Observable;
 import rx.observables.MathObservable;
 
-public class StdDev implements StatisticalAlgo {
+public class newStdDev implements newStatisticalAlgo {
 
 	int window_size;
 	
 	public String getPluginName() {
-		return "StdDev";
+		return "newStdDev";
 	}
 
 	public void set_params(int size) {

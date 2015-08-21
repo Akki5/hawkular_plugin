@@ -33,7 +33,7 @@ public class Mode implements StatisticalAlgo {
 			return -1.0;
 			
 		Collections.sort(elements);
-		double res,temp,max=0;
+		double res=elements.get(0),temp,max=0;
 		temp=1;
 		for(int i=1;i<size;i++)
 		{

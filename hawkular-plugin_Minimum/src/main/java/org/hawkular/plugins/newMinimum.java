@@ -9,12 +9,12 @@ import org.hawkular.*;
 import rx.Observable;
 import rx.observables.MathObservable;
 
-public class Minimum implements StatisticalAlgo {
+public class newMinimum implements newStatisticalAlgo {
 
 	int window_size;
 	
 	public String getPluginName() {
-		return "Minimum";
+		return "newMinimum";
 	}
 
 	public void set_params(int size) {

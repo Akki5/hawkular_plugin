@@ -10,12 +10,12 @@ import org.hawkular.*;
 import rx.Observable;
 import rx.observables.MathObservable;
 
-public class Average implements StatisticalAlgo {
+public class newAverage implements newStatisticalAlgo {
 
 	int window_size;
 	
 	public String getPluginName() {
-		return "Average";
+		return "newAverage";
 	}
 
 	public void set_params(int size) {

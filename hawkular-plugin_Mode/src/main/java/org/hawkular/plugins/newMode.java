@@ -10,12 +10,12 @@ import org.hawkular.*;
 import rx.Observable;
 import rx.observables.MathObservable;
 
-public class Mode implements StatisticalAlgo {
+public class newMode implements newStatisticalAlgo {
 
 	int window_size;
 	
 	public String getPluginName() {
-		return "Mode";
+		return "newMode";
 	}
 
 	public void set_params(int size) {

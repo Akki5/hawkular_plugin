@@ -9,22 +9,22 @@ import java.util.stream.IntStream;
 
 import rx.Observable;
 
-public class PluginDemo {
+public class newPluginDemo {
 
 	// the directory where we keep the plugin classes
 	String pluginsDir;
 	
 	// a list where we keep an initialized object of each plugin class
-	Map<String, StatisticalAlgo> plugins;
+	Map<String, newStatisticalAlgo> plugins;
 	
 	// constructor to initialize plugin directory and the list plugins
-	PluginDemo (String args[]) {
+	newPluginDemo (String args[]) {
 		if (args.length > 0)
 			pluginsDir = args[0];
 		else
 			pluginsDir = "org.hawkular.plugins";
 		
-		plugins = new HashMap<String, StatisticalAlgo>();
+		plugins = new HashMap<String, newStatisticalAlgo>();
 
 	}
 	
@@ -40,7 +40,7 @@ public class PluginDemo {
 		
 		Observable<Integer> elements = Observable.from(testInts);
 		
-		PluginDemo demo = new PluginDemo(args);
+		newPluginDemo demo = new newPluginDemo(args);
 		
 		// load all classes in plugin directory via classloader class
 		demo.getPlugins();
@@ -61,7 +61,7 @@ public class PluginDemo {
 		File jarDir;
 		ClassLoader cl;
 		
-		String[] Class_names = {"Average","Maximum","Minimum","Mode","StdDev"};
+		String[] Class_names = {"newAverage","newMaximum","newMinimum","newMode","newStdDev"};
 		for(int i=0;i<Class_names.length;i++)
 		{
 			jarDir = new File(System.getProperty("user.dir")+ File.separator + "target" + File.separator + "hawkular-plugin_"+ Class_names[i] + "-1.0-SNAPSHOT.jar");
@@ -69,9 +69,9 @@ public class PluginDemo {
 			Class c = cl.loadClass(Class_names[i]);
 			Class[] intf = c.getInterfaces();
 			for (int j=0; j<intf.length; j++) {
-				if (intf[j].getName().equals("org.hawkular.StatisticalAlgo")) {
-					// the following line assumes that StatisticalAlgo has a no-argument constructor
-					StatisticalAlgo pf = (StatisticalAlgo) c.newInstance();
+				if (intf[j].getName().equals("org.hawkular.newStatisticalAlgo")) {
+					// the following line assumes that newStatisticalAlgo has a no-argument constructor
+					newStatisticalAlgo pf = (newStatisticalAlgo) c.newInstance();
 					plugins.put(Class_names[i], pf);
 					continue;
 				}
@@ -88,7 +88,7 @@ public class PluginDemo {
 	
 		// Using RxJava for all computations
 		
-		StatisticalAlgo pf = ((StatisticalAlgo)plugins.get(name));
+		newStatisticalAlgo pf = ((newStatisticalAlgo)plugins.get(name));
 		pf.set_params(window_size);
 		pf.compute(elements);
 		
