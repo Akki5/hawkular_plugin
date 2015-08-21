@@ -1,1 +1,17 @@
-# hawkular_plugin
+= Hawkular
+
+Hawkular is an Open Source monitoring solution, following the successful RHQ Project, benefiting from years of experience. Hawkular is developed with modularity and scalability in mind. Components can be re-used in applications outside of Hawkular.
+Hawkular is able to receive monitoring data from various existing sources (collectd, gmond,...). Hawkular is a modular systems monitoring suite, that consists of several sub-projects for
+storing of metrics, alerting on incoming events and more.
+
+Project website: http://www.hawkular.org 
+
+== About this repository
+
+This repository, 'hawkular_plugin', constitutes the work done during GSoC 2015 under the project - 'Hawkular - pluggable data processors for metrics'.
+
+Hawkular-metrics deals with computation of values and operations on the raw data. This project is aimed to develop interface for plugins that improve the performance of Hawkular-Metrics making it more dependable, dynamic and extending the scope of its usage in operating with data sets.Plugins are needed to apply statistical algorithms to the data and compute those necessary functions. Such plugins may be plugged in at runtime whenever user wants it to.
+
+== Building
+
+To build hawkular_plugin, clone this repository and build from the top level.
