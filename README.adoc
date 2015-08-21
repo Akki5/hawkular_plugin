@@ -8,10 +8,25 @@ Project website: http://www.hawkular.org
 
 == About this repository
 
-This repository, 'hawkular_plugin', constitutes the work done during GSoC 2015 under the project - 'Hawkular - pluggable data processors for metrics'.
+This repository, `hawkular_plugin`, constitutes the work done during GSoC 2015 under the project - `Hawkular - pluggable data processors for metrics`.
 
 Hawkular-metrics deals with computation of values and operations on the raw data. This project is aimed to develop interface for plugins that improve the performance of Hawkular-Metrics making it more dependable, dynamic and extending the scope of its usage in operating with data sets.Plugins are needed to apply statistical algorithms to the data and compute those necessary functions. Such plugins may be plugged in at runtime whenever user wants it to.
 
 == Building
 
 To build hawkular_plugin, clone this repository and build from the top level.
+
+[source,shell]
+----
+$ git clone https://github.com/Akki5/hawkular_plugin.git
+$ cd hawkular_plugin
+$ mvn install
+----
+Once those steps are achieved, necessary .jar archives will be available in `target` directory.
+
+To run the actual demo of the project you need to execute following command specifying the main .jar file.
+[source,shell]
+----
+$ java -cp target/hawkular-plugin-core-1.0-SNAPSHOT.jar org.hawkular.PluginDemo
+----
+On running the demo, it asks for the plugin you are interested in. Once you feed your choice, the demo computes the required statistical algorithm for you on a particular set of data.
