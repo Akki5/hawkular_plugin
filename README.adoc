@@ -7,7 +7,7 @@ Hawkular is able to receive monitoring data from various existing sources (colle
 
 This repository, `hawkular_plugin`, constitutes the work done during GSoC 2015 under the project - `Hawkular - pluggable data processors for metrics`.
 
-Hawkular-metrics deals with computation of values and operations on the raw data. This project is aimed to develop interface for plugins that improve the performance of Hawkular-Metrics making it more dependable, dynamic and extending the scope of its usage in operating with data sets.Plugins are needed to apply statistical algorithms to the data and compute those necessary functions. Such plugins may be plugged in at runtime whenever user wants it to.
+Hawkular has sub-repo Hawkular-metrics which deals with computation of values and operations on the raw data. This project is aimed to develop interface for plugins that improve the performance of Hawkular-Metrics making it more dependable, dynamic and extending the scope of its usage in operating with data sets.Plugins are needed to apply statistical algorithms to the data and compute those necessary functions. Such plugins may be plugged in at runtime whenever user wants it to.
 
 == Building
 
@@ -32,10 +32,37 @@ On running the demo, it asks for the plugin you are interested in. Once you feed
 
 === Package `org.hawkular`
 
-Contains the interfaces that comprise the Project + the demo class and the ClassLoader class.
-There are therefore 2 kinds of interfaces:
+Contains the interfaces that comprise the Project + the demo (context) class and the ClassLoader class.
+There are 2 kinds of interfaces:
 
 * first, *StatisticalAlgo*, deals with *list* of elements using *java.util.List*. *PluginDemo* class is used to run all the plugins that implement this interface.
 * second, *newStatisticalAlgo*, deals with *observable* of elements using *RxJava* and its library *rx.Observable*. *newPluginDemo* class is used to run all the plugins that implement this interface.
+
 *PluginClassLoader* is the ClassLoader class which loads all the plugins at runtime as and when requested for by the user.
+
+It also contains a Test class, *PluginDemoTest*, which tests all the plugins implemented one by one and also at once.
+
 === Package `org.hawkular.plugins`
+
+Contains all the concrete classes or plugins that implements the above mentioned interfaces. Though more complicated plugins constitute the goal of the project, currently there are 5 plugins implemented in this project:
+
+[cols=">s,d"]
+|=======================
+| Average |
+This computes the average of all the subsequences of the metrics of a definite and user-defined length  +
+This has two implementations, one dealing with list of elements whereas the other one with prefix "new" dealing with observable of elements.
+| Maximum |
+This computes the maximum of all the subsequences of the metrics of a definite and user-defined length  +
+This has two implementations, one dealing with list of elements whereas the other one with prefix "new" dealing with observable of elements.
+| Minimum |
+This computes the minimum of all the subsequences of the metrics of a definite and user-defined length  +
+This has two implementations, one dealing with list of elements whereas the other one with prefix "new" dealing with observable of elements.
+| Mode |
+This computes the mode of all the subsequences of the metrics of a definite and user-defined length  +
+This has only one implementations as of now dealing with list of elements. +
+Its implementation dealing with observable of elements needs to be done.
+| Standard Deviation |
+This computes the standard deviation of all the subsequences of the metrics of a definite and user-defined length  +
+This has only one implementations as of now dealing with list of elements. +
+Its implementation dealing with observable of elements needs to be done.
+|=======================
