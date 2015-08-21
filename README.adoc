@@ -1,10 +1,7 @@
 = Hawkular
 
 Hawkular is an Open Source monitoring solution, following the successful RHQ Project, benefiting from years of experience. Hawkular is developed with modularity and scalability in mind. Components can be re-used in applications outside of Hawkular.
-Hawkular is able to receive monitoring data from various existing sources (collectd, gmond,...). Hawkular is a modular systems monitoring suite, that consists of several sub-projects for
-storing of metrics, alerting on incoming events and more.
-
-Project website: http://www.hawkular.org 
+Hawkular is able to receive monitoring data from various existing sources (collectd, gmond,...). Hawkular is a modular systems monitoring suite, that consists of several sub-projects for storing of metrics, alerting on incoming events and more. More details can be found on the website: http://www.hawkular.org 
 
 == About this repository
 
@@ -30,3 +27,15 @@ To run the actual demo of the project you need to execute following command spec
 $ java -cp target/hawkular-plugin-core-1.0-SNAPSHOT.jar org.hawkular.PluginDemo
 ----
 On running the demo, it asks for the plugin you are interested in. Once you feed your choice, the demo computes the required statistical algorithm for you on a particular set of data.
+
+== Description of the Project
+
+=== Package `org.hawkular`
+
+Contains the interfaces that comprise the Project + the demo class and the ClassLoader class.
+There are therefore 2 kinds of interfaces:
+
+* first, *StatisticalAlgo*, deals with *list* of elements using *java.util.List*. *PluginDemo* class is used to run all the plugins that implement this interface.
+* second, *newStatisticalAlgo*, deals with *observable* of elements using *RxJava* and its library *rx.Observable*. *newPluginDemo* class is used to run all the plugins that implement this interface.
+*PluginClassLoader* is the ClassLoader class which loads all the plugins at runtime as and when requested for by the user.
+=== Package `org.hawkular.plugins`
